@@ -6,11 +6,30 @@ namespace Assets.Scripts.Actions
 {
     public class StartMenu : MonoBehaviour
     {
+        private Vector2Int _defaultResolution = new(1280, 700);
         public GameObject LevelSelect;
 
         private void Start()
         {
             LevelSelect.SetActive(false);
+        }
+
+        public void ToggleFullscreen()
+        {
+            FullScreenMode mode;
+            if (Screen.fullScreenMode == FullScreenMode.Windowed)
+            {
+                _defaultResolution.y = Screen.height;
+                _defaultResolution.x = Screen.width;
+
+                mode = FullScreenMode.FullScreenWindow;
+                Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, mode);
+            }
+            else
+            {
+                mode = FullScreenMode.Windowed;
+                Screen.SetResolution(_defaultResolution.x, _defaultResolution.y, mode);
+            }
         }
 
         public void ShowLevelSelect()
