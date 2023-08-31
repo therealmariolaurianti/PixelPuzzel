@@ -8949,6 +8949,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8305283974065452484, guid: 4935c4c8fd7e0684abb34e4b3e5b5792, type: 3}
+      propertyPath: OpenDoor
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12263,6 +12267,10 @@ PrefabInstance:
       value: BlueBird
       objectReference: {fileID: 0}
     - target: {fileID: 6102499480663953494, guid: b34610e402fbe874c81941ff1f37f562, type: 3}
+      propertyPath: Speed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6102499480663953494, guid: b34610e402fbe874c81941ff1f37f562, type: 3}
       propertyPath: WayPoints.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -12467,6 +12475,10 @@ PrefabInstance:
     - target: {fileID: 657338706008227632, guid: b34610e402fbe874c81941ff1f37f562, type: 3}
       propertyPath: m_Name
       value: BlueBird
+      objectReference: {fileID: 0}
+    - target: {fileID: 6102499480663953494, guid: b34610e402fbe874c81941ff1f37f562, type: 3}
+      propertyPath: Speed
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6102499480663953494, guid: b34610e402fbe874c81941ff1f37f562, type: 3}
       propertyPath: WayPoints.Array.size

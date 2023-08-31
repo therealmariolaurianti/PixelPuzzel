@@ -15,6 +15,9 @@ namespace Assets.Scripts.Actions
 
         public void OnTriggerEnter2D(Collider2D collision)
         {
+            if (!collision.CompareTag(GameObjectStrings.Player))
+                return;
+
             _animator.SetTrigger(AnimationStrings.Collected);
             AudioSource.PlayClipAtPoint(AudioSource.clip, gameObject.transform.position, AudioSource.volume);
         }
