@@ -19,7 +19,7 @@ namespace Assets.Scripts.Actions
 
         private void OnGUI()
         {
-            var location = new Rect(500, 5, 85, 25);
+            var location = new Rect(Screen.width - 85, Screen.height - 25, 85, 25);
             var text = $"FPS: {Mathf.Round(count)}";
             Texture black = Texture2D.blackTexture;
             GUI.DrawTexture(location, black, ScaleMode.StretchToFill);
