@@ -16,23 +16,16 @@ namespace Assets.Scripts.Enemies
 
         public void OnCollisionDetected(Collider2D collision)
         {
-            if (collision.gameObject.tag == GameObjectStrings.Player)
-            {
-                _animator.SetBool(AnimationStrings.HasPlayerInZone, true);
-                KillZone.enabled = true;
-                FireSound.Play();
-                //AudioSource.PlayClipAtPoint(FireSound.clip, gameObject.transform.position, FireSound.volume);
-            }
+            _animator.SetBool(AnimationStrings.HasPlayerInZone, true);
+            KillZone.enabled = true;
+            FireSound.Play();
         }
 
         public void OnCollisionLeave(Collider2D collision)
         {
-            if (collision.gameObject.tag == GameObjectStrings.Player)
-            {
-                _animator.SetBool(AnimationStrings.HasPlayerInZone, false);
-                KillZone.enabled = false;
-                StartCoroutine(AudioFadeOut.FadeOut(FireSound, .3f));
-            }
+            _animator.SetBool(AnimationStrings.HasPlayerInZone, false);
+            KillZone.enabled = false;
+            StartCoroutine(AudioFadeOut.FadeOut(FireSound, .3f));
         }
     }
 }

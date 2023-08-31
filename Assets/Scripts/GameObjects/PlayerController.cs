@@ -15,18 +15,17 @@ namespace Assets.Scripts.GameObjects
 
         private readonly float _accelerationRate = 10f;
         private readonly float _coyoteTime = 0.02f;
-        private readonly float _deccelerationRate = 10f;
-        private readonly float _jumpBufferTime = 0.03f;
+        private readonly float _decelerationRate = 10f;
         private readonly float _jumpCutMultiplier = .5f;
-        
+
         private Animator _animator;
+
+        private bool _bufferJump;
         private float _coyoteTimeCounter;
         private bool _isFacingRight = true;
         private bool _isJumping;
         private bool _isMoving;
         private bool _isSprinting;
-
-        private float _jumpBufferCounter;
         private Vector2 _moveInput;
         private Rigidbody2D _rigidBody;
         private bool _spawned;
@@ -119,7 +118,7 @@ namespace Assets.Scripts.GameObjects
         {
             var targetSpeed = _moveInput * MoveSpeed;
             var speedDifference = targetSpeed.x - _rigidBody.velocity.x;
-            var accelerationRate = Mathf.Abs(SprintSpeed) > 0.01f ? _accelerationRate : _deccelerationRate;
+            var accelerationRate = Mathf.Abs(SprintSpeed) > 0.01f ? _accelerationRate : _decelerationRate;
             var movement = Mathf.Pow(Mathf.Abs(speedDifference) * accelerationRate, 1f) * Mathf.Sign(speedDifference);
 
             _rigidBody.AddForce(movement * Vector2.right);
@@ -144,6 +143,12 @@ namespace Assets.Scripts.GameObjects
         public void OnGroundDetected()
         {
             _isJumping = false;
+
+            if (_bufferJump)
+            {
+                _bufferJump = false;
+                DoJump();
+            }
         }
 
         public void OnJump(InputAction.CallbackContext context)
@@ -157,7 +162,6 @@ namespace Assets.Scripts.GameObjects
                 }
 
             _coyoteTimeCounter = _coyoteTime;
-            _jumpBufferCounter = _jumpBufferTime;
 
             if (context.started && _spawned)
             {
@@ -169,11 +173,7 @@ namespace Assets.Scripts.GameObjects
                 }
                 else if (!_touchingDirections.IsGrounded && _isJumping)
                 {
-                    _jumpBufferCounter -= Time.deltaTime;
-                    if (_jumpBufferCounter > 0)
-                    {
-                        //DoJump();
-                    }
+                    _bufferJump = true;
                 }
                 else if (_touchingDirections.IsGrounded)
                 {
@@ -195,7 +195,6 @@ namespace Assets.Scripts.GameObjects
 
             JumpSound.Play();
             _isJumping = true;
-            _jumpBufferCounter = 0;
         }
 
         public void OnSprint(InputAction.CallbackContext context)

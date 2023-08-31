@@ -65,7 +65,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.025922537}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -76,7 +76,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.94, y: 0.29}
+  m_Size: {x: 0.94, y: 0.23815489}
   m_EdgeRadius: 0
 --- !u!114 &8818364313672372990
 MonoBehaviour:
@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 7980004799029706833}
   - component: {fileID: 1998878610880843721}
   - component: {fileID: 4532525214516394717}
-  - component: {fileID: 6097501657593643225}
+  - component: {fileID: 1355507582282904902}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -624,7 +624,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!61 &6097501657593643225
+--- !u!61 &1355507582282904902
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -656,7 +656,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.03294468, y: -0.24595141}
+  m_Offset: {x: -0.030385971, y: -0.28175807}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -667,5 +667,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.447792, y: 1.5080972}
+  m_Size: {x: 1.3204651, y: 1.4364839}
   m_EdgeRadius: 0

@@ -33,9 +33,7 @@ namespace Assets.Scripts
 
         private static bool IsInvalid(Collider2D collision)
         {
-            var type = collision.GetType();
-            return collision.CompareTag(Projectile) || collision.CompareTag(Trap) ||
-                   (type == typeof(BoxCollider2D) && !collision.CompareTag(Platform));
+            return collision.CompareTag(Projectile) || collision.CompareTag(Trap);
         }
     }
 }
