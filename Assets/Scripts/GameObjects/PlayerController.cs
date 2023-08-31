@@ -12,15 +12,21 @@ namespace Assets.Scripts.GameObjects
 
         public float SprintSpeed = 10f;
         public float WalkSpeed = 8f;
-        private readonly float _coyoteTime = 0.02f;
 
+        private readonly float _accelerationRate = 10f;
+        private readonly float _coyoteTime = 0.02f;
+        private readonly float _deccelerationRate = 10f;
+        private readonly float _jumpBufferTime = 0.03f;
         private readonly float _jumpCutMultiplier = .5f;
+        
         private Animator _animator;
         private float _coyoteTimeCounter;
         private bool _isFacingRight = true;
         private bool _isJumping;
         private bool _isMoving;
         private bool _isSprinting;
+
+        private float _jumpBufferCounter;
         private Vector2 _moveInput;
         private Rigidbody2D _rigidBody;
         private bool _spawned;
@@ -105,6 +111,22 @@ namespace Assets.Scripts.GameObjects
             _rigidBody.velocity = new Vector2(_moveInput.x * MoveSpeed, _rigidBody.velocity.y);
             _animator.SetFloat(AnimationStrings.YVelocity, _rigidBody.velocity.y);
 
+            UpdateGravityScale();
+            ApplyMovementForce();
+        }
+
+        private void ApplyMovementForce()
+        {
+            var targetSpeed = _moveInput * MoveSpeed;
+            var speedDifference = targetSpeed.x - _rigidBody.velocity.x;
+            var accelerationRate = Mathf.Abs(SprintSpeed) > 0.01f ? _accelerationRate : _deccelerationRate;
+            var movement = Mathf.Pow(Mathf.Abs(speedDifference) * accelerationRate, 1f) * Mathf.Sign(speedDifference);
+
+            _rigidBody.AddForce(movement * Vector2.right);
+        }
+
+        private void UpdateGravityScale()
+        {
             if (_rigidBody.velocity.y < 0)
                 _rigidBody.gravityScale = 1.8f;
             else
@@ -135,6 +157,7 @@ namespace Assets.Scripts.GameObjects
                 }
 
             _coyoteTimeCounter = _coyoteTime;
+            _jumpBufferCounter = _jumpBufferTime;
 
             if (context.started && _spawned)
             {
@@ -143,6 +166,14 @@ namespace Assets.Scripts.GameObjects
                     _coyoteTimeCounter -= Time.deltaTime;
                     if (_coyoteTimeCounter > 0)
                         DoJump();
+                }
+                else if (!_touchingDirections.IsGrounded && _isJumping)
+                {
+                    _jumpBufferCounter -= Time.deltaTime;
+                    if (_jumpBufferCounter > 0)
+                    {
+                        //DoJump();
+                    }
                 }
                 else if (_touchingDirections.IsGrounded)
                 {
@@ -164,6 +195,7 @@ namespace Assets.Scripts.GameObjects
 
             JumpSound.Play();
             _isJumping = true;
+            _jumpBufferCounter = 0;
         }
 
         public void OnSprint(InputAction.CallbackContext context)
