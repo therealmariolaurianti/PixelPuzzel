@@ -6,19 +6,14 @@ namespace Assets.Scripts
 {
     public class DetectionZone : MonoBehaviour
     {
-        private Collider2D _collider;
         public List<Collider2D> DetectedColliders = new();
-        public UnityEvent<Collider2D> NoCollidersRemain;
 
-        public UnityEvent<Collider2D> OnColliderDetected;
+        public UnityEvent<Collider2D> NoCollidersRemain;
+        public UnityEvent<Collider2D> OnColliderDetected; 
 
         private static string Projectile => "Projectile";
+        private static string Platform => "Platform";
         private static string Trap => "Trap";
-
-        private void Awake()
-        {
-            _collider = GetComponent<Collider2D>();
-        }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
@@ -29,17 +24,17 @@ namespace Assets.Scripts
             OnColliderDetected.Invoke(collision);
         }
 
-        private static bool IsInvalid(Collider2D collision)
-        {
-            var type = collision.GetType();
-            return collision.tag == Projectile || collision.tag == Trap || type == typeof(BoxCollider2D);
-        }
-
         private void OnTriggerExit2D(Collider2D collision)
         {
             DetectedColliders.Remove(collision);
             if (DetectedColliders.Count <= 0)
                 NoCollidersRemain?.Invoke(collision);
+        }
+
+        private static bool IsInvalid(Collider2D collision)
+        {
+            var type = collision.GetType();
+            return collision.CompareTag(Projectile) || collision.CompareTag(Trap) || (type == typeof(BoxCollider2D) && !collision.CompareTag(Platform));
         }
     }
 }

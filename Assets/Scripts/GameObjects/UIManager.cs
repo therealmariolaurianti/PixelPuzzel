@@ -4,32 +4,27 @@ using System.Linq;
 using Assets.Data;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.GameObjects
 {
     public class UIManager : MonoBehaviour
     {
-        private int _deaths;
-        private int _melonsCollected;
-        private bool _timeIsRunning;
-        private float _timeRemaining;
         public GameObject CollectedText;
         public GameObject DeathText;
-
         public TMP_Text LevelFourText;
-
         public TMP_Text LevelOneText;
         public TMP_Text LevelThreeText;
         public TMP_Text LevelTwoText;
         public GameObject PausePanel;
-
         public GameObject Player;
-
         public TMP_Text TimeText;
 
         public int TotalMelons;
+        private int _deaths;
+        private int _melonsCollected;
+        private bool _timeIsRunning;
+        private float _timeRemaining;
 
         private Level CurrentLevel => Helper.GetLevel();
         private bool IsFirstLevel => CurrentLevel == Level.One;
@@ -50,6 +45,30 @@ namespace Assets.Scripts.GameObjects
             SetDeathText(levelData, true);
         }
 
+        private void Update()
+        {
+            if (_timeIsRunning)
+                if (_timeRemaining >= 0)
+                {
+                    _timeRemaining += Time.deltaTime;
+                    TimeText.text = Helper.TimeFromFloat(_timeRemaining);
+                }
+        }
+
+        private void OnEnable()
+        {
+            CharacterEvents.MelonCollected += OnMelonCollected;
+            CharacterEvents.PlayerDeath += OnPlayerDeath;
+            CharacterEvents.StopTimer += OnStopTimer;
+        }
+
+        private void OnDisable()
+        {
+            CharacterEvents.MelonCollected -= OnMelonCollected;
+            CharacterEvents.PlayerDeath -= OnPlayerDeath;
+            CharacterEvents.StopTimer -= OnStopTimer;
+        }
+
         private void SetAllLevelTimes(List<LevelData> levelData)
         {
             if (levelData is null)
@@ -62,16 +81,6 @@ namespace Assets.Scripts.GameObjects
             }
 
             SetLevelText(CurrentLevel, 0);
-        }
-
-        private void Update()
-        {
-            if (_timeIsRunning)
-                if (_timeRemaining >= 0)
-                {
-                    _timeRemaining += Time.deltaTime;
-                    TimeText.text = Helper.TimeFromFloat(_timeRemaining);
-                }
         }
 
         private void SetDeathText(List<LevelData> levelData, bool isStarting)
@@ -104,13 +113,8 @@ namespace Assets.Scripts.GameObjects
         private void OnStopTimer()
         {
             _timeIsRunning = false;
-
-            DataWriter.Write(new LevelData
-            {
-                Deaths = _deaths,
-                TimeInSeconds = _timeRemaining,
-                Level = Helper.GetLevelInt()
-            });
+            
+            DataWriter.Write(_deaths, _timeRemaining, Helper.GetLevelInt());
 
             SetLevelText(CurrentLevel);
         }
@@ -135,20 +139,6 @@ namespace Assets.Scripts.GameObjects
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-        }
-
-        private void OnEnable()
-        {
-            CharacterEvents.MelonCollected += OnMelonCollected;
-            CharacterEvents.PlayerDeath += OnPlayerDeath;
-            CharacterEvents.StopTimer += OnStopTimer;
-        }
-
-        private void OnDisable()
-        {
-            CharacterEvents.MelonCollected -= OnMelonCollected;
-            CharacterEvents.PlayerDeath -= OnPlayerDeath;
-            CharacterEvents.StopTimer -= OnStopTimer;
         }
 
         private void OnMelonCollected()

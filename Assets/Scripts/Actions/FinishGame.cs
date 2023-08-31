@@ -1,4 +1,5 @@
 using Assets.Data;
+using Assets.Scripts.GameObjects;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,6 +25,7 @@ namespace Assets.Scripts.Actions
 
         public void OnTriggerEnter2D(Collider2D collision)
         {
+            CharacterEvents.StopTimer.Invoke();
             BackgroundMusic.Stop();
             Fireworks.SetActive(true);
 

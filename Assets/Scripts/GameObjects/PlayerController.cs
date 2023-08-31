@@ -24,7 +24,7 @@ namespace Assets.Scripts.GameObjects
 
         public float SprintSpeed = 10f;
         public float WalkSpeed = 8f;
-        public float JumpImpulse => 8.5f;
+        public float JumpImpulse => 7f;
         public float IdleSpeed => 0f;
         public float AirSpeed => 9f;
 
@@ -164,7 +164,7 @@ namespace Assets.Scripts.GameObjects
         {
             _animator.SetBool(AnimationStrings.IsJumping, true);
 
-            _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, JumpImpulse) * 1.1f;
+            _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, JumpImpulse) * 1.2f;
 
             JumpSound.Play();
             _isJumping = true;
@@ -172,6 +172,8 @@ namespace Assets.Scripts.GameObjects
 
         public void OnSprint(InputAction.CallbackContext context)
         {
+            return;
+            
             if (context.started)
                 IsSprinting = true;
             else if (context.canceled)

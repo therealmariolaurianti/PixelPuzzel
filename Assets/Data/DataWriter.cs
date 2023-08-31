@@ -9,10 +9,17 @@ namespace Assets.Data
     {
         private static string PersistentDataPath => Application.persistentDataPath + "GameData.json";
 
-        public static bool Write(LevelData levelData)
+        public static bool Write(int deaths, float timeRemaining, int level)
         {
             try
             {
+                var levelData = new LevelData
+                {
+                    Deaths = deaths,
+                    TimeInSeconds = timeRemaining,
+                    Level = level
+                };
+                
                 var existingData = Read();
                 existingData.Add(levelData);
 

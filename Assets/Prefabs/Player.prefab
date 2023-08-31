@@ -244,7 +244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JumpSound: {fileID: 4532525214516394717}
   SprintSpeed: 10
-  WalkSpeed: 7
+  WalkSpeed: 10
 --- !u!114 &6706668230735102367
 MonoBehaviour:
   m_ObjectHideFlags: 0
