@@ -30,7 +30,7 @@ namespace Assets.Scripts.GameObjects
         private Rigidbody2D _rigidBody;
         private bool _spawned;
         private TouchingDirections _touchingDirections;
-        public float JumpImpulse => 7f;
+        public float JumpImpulse => 9f;
         public float IdleSpeed => 0f;
         public float AirSpeed => 9f;
 
@@ -140,7 +140,7 @@ namespace Assets.Scripts.GameObjects
             SetDirection();
         }
 
-        public void OnGroundDetected()
+        public void OnGroundDetected(Collider2D collision)
         {
             _isJumping = false;
 

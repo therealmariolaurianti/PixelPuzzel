@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d06f61c9e5778741ba924a823fe116b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpHeight: 15.7
+  JumpHeight: 20
   Player: {fileID: 0}
   SpringJumpSound: {fileID: 2329207394389334887}
 --- !u!82 &2329207394389334887

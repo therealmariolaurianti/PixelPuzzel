@@ -9,7 +9,7 @@ namespace Assets.Scripts.Actions
         public GameObject[] WayPoints;
         public float Speed = 2f;
 
-        void Update()
+        void FixedUpdate()
         {
             if (Vector2.Distance(WayPoints[_currentWayPointIndex].transform.position, transform.position) < .1f)
             {

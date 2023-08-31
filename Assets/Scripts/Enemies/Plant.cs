@@ -17,7 +17,7 @@ namespace Assets.Scripts.Enemies
 
         private void Update()
         {
-            HasTarget = KillDetectionZone.DetectedColliders.Any();
+            HasTarget = KillDetectionZone.DetectedColliders.Any(dc => dc.CompareTag(GameObjectStrings.Player));
         }
 
         public bool HasTarget
@@ -30,9 +30,10 @@ namespace Assets.Scripts.Enemies
             }
         }
 
-        public void OnPlayerDetected()
-        {
-            gameObject.transform.localScale = new Vector2(gameObject.transform.localScale.x * -1, 1);
+        public void OnPlayerDetected(Collider2D collision)
+        {   
+            if(collision.CompareTag(GameObjectStrings.Player))
+                gameObject.transform.localScale = new Vector2(gameObject.transform.localScale.x * -1, 1);
         }
     }
 }
