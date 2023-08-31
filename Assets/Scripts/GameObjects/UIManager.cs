@@ -32,6 +32,7 @@ namespace Assets.Scripts.GameObjects
         private void Awake()
         {
             PausePanel.SetActive(false);
+            Application.targetFrameRate = -1;
         }
 
         private void Start()
