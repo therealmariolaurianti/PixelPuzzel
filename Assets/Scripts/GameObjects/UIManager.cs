@@ -207,6 +207,7 @@ namespace Assets.Scripts.GameObjects
 
         public void Menu()
         {
+            DataWriter.Clear();
             SceneManager.LoadScene(0);
         }
 
