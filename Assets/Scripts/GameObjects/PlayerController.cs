@@ -23,10 +23,10 @@ namespace Assets.Scripts.GameObjects
         public AudioSource JumpSound;
 
         public float SprintSpeed = 10f;
-        public float WalkSpeed = 5f;
-        public float JumpImpulse => 9f;
+        public float WalkSpeed = 8f;
+        public float JumpImpulse => 8.5f;
         public float IdleSpeed => 0f;
-        public float AirSpeed => 7.5f;
+        public float AirSpeed => 9f;
 
         public bool IsFacingRight
         {
@@ -106,7 +106,7 @@ namespace Assets.Scripts.GameObjects
 
             if (_rigidBody.velocity.y < 0)
             {
-                _rigidBody.gravityScale = 2.5f;
+                _rigidBody.gravityScale = 1.8f;
             }
             else
                 _rigidBody.gravityScale = 1;
@@ -164,7 +164,7 @@ namespace Assets.Scripts.GameObjects
         {
             _animator.SetBool(AnimationStrings.IsJumping, true);
 
-            _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, JumpImpulse);
+            _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, JumpImpulse) * 1.1f;
 
             JumpSound.Play();
             _isJumping = true;
