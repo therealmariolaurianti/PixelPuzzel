@@ -9,7 +9,7 @@ namespace Assets.Scripts
         public List<Collider2D> DetectedColliders = new();
 
         public UnityEvent<Collider2D> NoCollidersRemain;
-        public UnityEvent<Collider2D> OnColliderDetected; 
+        public UnityEvent<Collider2D> OnColliderDetected;
 
         private static string Projectile => "Projectile";
         private static string Platform => "Platform";
@@ -34,7 +34,8 @@ namespace Assets.Scripts
         private static bool IsInvalid(Collider2D collision)
         {
             var type = collision.GetType();
-            return collision.CompareTag(Projectile) || collision.CompareTag(Trap) || (type == typeof(BoxCollider2D) && !collision.CompareTag(Platform));
+            return collision.CompareTag(Projectile) || collision.CompareTag(Trap) ||
+                   (type == typeof(BoxCollider2D) && !collision.CompareTag(Platform));
         }
     }
 }

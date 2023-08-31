@@ -8,7 +8,13 @@ namespace Assets.Scripts.GameObjects
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerController : MonoBehaviour
     {
+        public AudioSource JumpSound;
+
+        public float SprintSpeed = 10f;
+        public float WalkSpeed = 8f;
         private readonly float _coyoteTime = 0.02f;
+
+        private readonly float _jumpCutMultiplier = .5f;
         private Animator _animator;
         private float _coyoteTimeCounter;
         private bool _isFacingRight = true;
@@ -19,11 +25,6 @@ namespace Assets.Scripts.GameObjects
         private Rigidbody2D _rigidBody;
         private bool _spawned;
         private TouchingDirections _touchingDirections;
-
-        public AudioSource JumpSound;
-
-        public float SprintSpeed = 10f;
-        public float WalkSpeed = 8f;
         public float JumpImpulse => 7f;
         public float IdleSpeed => 0f;
         public float AirSpeed => 9f;
@@ -105,9 +106,7 @@ namespace Assets.Scripts.GameObjects
             _animator.SetFloat(AnimationStrings.YVelocity, _rigidBody.velocity.y);
 
             if (_rigidBody.velocity.y < 0)
-            {
                 _rigidBody.gravityScale = 1.8f;
-            }
             else
                 _rigidBody.gravityScale = 1;
         }
@@ -125,18 +124,15 @@ namespace Assets.Scripts.GameObjects
             _isJumping = false;
         }
 
-        private readonly float _jumpCutMultiplier = .5f;
-
         public void OnJump(InputAction.CallbackContext context)
         {
             if (!context.action.IsPressed())
-            {
                 if (_isJumping)
                 {
-                    _rigidBody.AddForce(Vector2.down * _rigidBody.velocity.y * (1 - _jumpCutMultiplier), ForceMode2D.Impulse);
+                    _rigidBody.AddForce(Vector2.down * _rigidBody.velocity.y * (1 - _jumpCutMultiplier),
+                        ForceMode2D.Impulse);
                     return;
                 }
-            }
 
             _coyoteTimeCounter = _coyoteTime;
 
@@ -172,12 +168,10 @@ namespace Assets.Scripts.GameObjects
 
         public void OnSprint(InputAction.CallbackContext context)
         {
-            return;
-            
-            if (context.started)
-                IsSprinting = true;
-            else if (context.canceled)
-                IsSprinting = false;
+            // if (context.started)
+            //     IsSprinting = true;
+            // else if (context.canceled)
+            //     IsSprinting = false;
         }
 
         private void SetDirection()

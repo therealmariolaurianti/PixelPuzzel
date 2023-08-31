@@ -113,7 +113,7 @@ namespace Assets.Scripts.GameObjects
         private void OnStopTimer()
         {
             _timeIsRunning = false;
-            
+
             DataWriter.Write(_deaths, _timeRemaining, Helper.GetLevelInt());
 
             SetLevelText(CurrentLevel);

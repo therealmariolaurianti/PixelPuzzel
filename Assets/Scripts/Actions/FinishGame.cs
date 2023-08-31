@@ -1,5 +1,4 @@
 using Assets.Data;
-using Assets.Scripts.GameObjects;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,11 +17,6 @@ namespace Assets.Scripts.Actions
             CharacterEvents.AllItemsCollected += OnAllItemsCollected;
         }
 
-        private void OnAllItemsCollected()
-        {
-            gameObject.SetActive(true);
-        }
-
         public void OnTriggerEnter2D(Collider2D collision)
         {
             CharacterEvents.StopTimer.Invoke();
@@ -33,6 +27,11 @@ namespace Assets.Scripts.Actions
             finishAudio.Play();
 
             Invoke(nameof(LoadEndGameScene), 3f);
+        }
+
+        private void OnAllItemsCollected()
+        {
+            gameObject.SetActive(true);
         }
 
         private void LoadEndGameScene()

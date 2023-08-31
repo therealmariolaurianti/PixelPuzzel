@@ -19,7 +19,7 @@ namespace Assets.Data
                     TimeInSeconds = timeRemaining,
                     Level = level
                 };
-                
+
                 var existingData = Read();
                 existingData.Add(levelData);
 
