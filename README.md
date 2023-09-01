@@ -3,6 +3,8 @@
 
 Collect specific amount of melons in the quickest time possible through all levels.
 
+![7xoxjv](https://github.com/therealmariolaurianti/PixelPuzzel/assets/25336894/3e0debba-f7ee-44ca-8c56-e459e99a85ef)
+
 ## Controls
 
 - A - MOVE LEFT
