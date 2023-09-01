@@ -14,6 +14,8 @@ Collect specific amount of melons in the quickest time possible through all leve
 ## Demo
 
 [Test Build](https://1drv.ms/f/c/0f762c7107a5fe9a/EvCJhujPz-9JrwCDL_qRseQBJi4Jkxr91oG4iWyyZJc_og?e=S3CeAg)
+<br />
+[Longer Gameplay Clip](https://clipchamp.com/watch/Dv00QI1VIQ3)
 
 ## Screenshots
 
