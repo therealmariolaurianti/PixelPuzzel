@@ -11,7 +11,7 @@ Collect specific amount of melons in the quickest time possible through all leve
 
 ## Demo
 
-[Test Build](./README_2.md)
+[Test Build](https://file.io/Yk6yhlUPSL7o)
 
 ## Screenshots
 
